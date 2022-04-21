@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import Table from "../Table/Table"
 import "./TableInterface.css"
 
@@ -10,7 +11,9 @@ export default function TableInterface() {
 		<main className='table-interface__container'>
 			<header>
 				<h2>{tableInterface.tableTitle}</h2>
-				<button>{tableInterface.button}</button>
+				<Link to='/form'>
+					<button>{tableInterface.button}</button>
+				</Link>
 			</header>
 			<Table />
 		</main>

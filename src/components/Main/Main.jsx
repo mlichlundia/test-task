@@ -1,6 +1,6 @@
 import "./Main.css"
-import TableInterface from "../TableInterface/TableInterface"
 import PopUpDelete from "../PopUpDelete/PopUpDelete"
+import { Outlet } from "react-router-dom"
 
 export default function Main() {
 	const appName = "Dashboard"
@@ -9,7 +9,7 @@ export default function Main() {
 			<header>
 				<h1>{appName}</h1>
 			</header>
-			<TableInterface />
+			<Outlet />
 			<PopUpDelete />
 		</div>
 	)
