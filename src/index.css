@@ -1,3 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Poppins:wght@400;700&family=Roboto+Mono&display=swap");
+
+html {
+	font-size: 3.333333333333333333vw;
+
+	--light-100: #fff;
+	--light-200: #f7f7f7;
+	--light-300: #e7e7e7;
+
+	--blue-800: #2476f1;
+	--blue-900: #1563d9;
+
+	--red-800: #ca3a3a;
+	--red-900: #ad3434;
+
+	--yellow-800: #f6c61b;
+	--yellow-900: #e0b208;
+
+	--green-800: #15cc74;
+	--green-900: #0fa15b;
+
+	--dark-800: #323232;
+	--dark-900: #2c2c2c;
+}
+
 *,
 *::before,
 *::after {
@@ -31,6 +56,8 @@ body {
 	scroll-behavior: smooth;
 	text-rendering: optimizeSpeed;
 	line-height: 1.5;
+	font-family: "Open Sans", Arial, sans-serif;
+	color: var(--dark-900);
 }
 
 img {
@@ -43,4 +70,110 @@ button,
 textarea,
 select {
 	font: inherit;
+}
+
+input,
+button,
+textarea,
+select,
+a {
+	cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p {
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	font-size: 2.5rem;
+	font-weight: 700;
+}
+
+h2 {
+	font-size: 1.75rem;
+	font-weight: 400;
+}
+
+h3 {
+	font-size: 1.25rem;
+	font-weight: 700;
+}
+
+.p1 {
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+.p2 {
+	font-size: 0.875rem;
+	font-weight: 300;
+}
+
+button {
+	padding: 0.75rem 1.25rem;
+	text-transform: capitalize;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 100%;
+	border: none;
+	border-radius: 0.25rem;
+	background: var(--blue-800);
+	color: var(--light-100);
+	transition: 0.25s;
+}
+
+button:hover {
+	background: var(--blue-900);
+}
+
+.button_edit {
+	background: var(--yellow-800);
+}
+
+.button_edit:hover {
+	background: var(--yellow-900);
+}
+
+.button_delete {
+	background: var(--red-800);
+}
+
+.button_delete:hover {
+	background: var(--red-900);
+}
+
+@media screen and (min-width: 600px) {
+	html {
+		font-size: 2.66666667vw;
+	}
+}
+@media screen and (min-width: 768px) {
+	html {
+		font-size: 2.0833333333333333333vw;
+	}
+}
+@media screen and (min-width: 992px) {
+	html {
+		font-size: 1.61290323vw;
+	}
+}
+@media screen and (min-width: 1200px) {
+	html {
+		font-size: 1.33333333333333333333333vw;
+	}
+}
+@media screen and (min-width: 1440px) {
+	html {
+		font-size: 1.1111111111111111111vw;
+	}
+}
+
+@media screen and (min-width: 1920px) {
+	html {
+		font-size: 0.8333333333333333333vw;
+	}
 }

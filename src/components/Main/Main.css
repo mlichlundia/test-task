@@ -1,0 +1,15 @@
+.main__wrapper {
+	padding: 2.5rem 0.75rem;
+}
+
+@media screen and (min-width: 1200px) {
+	.main__wrapper {
+		padding: 2.5rem 4.5rem;
+	}
+}
+
+@media screen and (min-width: 1440px) {
+	.main__wrapper {
+		padding: 2.5rem 10rem;
+	}
+}

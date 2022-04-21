@@ -1,0 +1,41 @@
+.table__container {
+	overflow: auto;
+}
+
+table {
+	border: 1px solid var(--light-300);
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th,
+td {
+	width: fit-content;
+	padding: 1rem;
+	text-align: center;
+}
+
+tr {
+	border-bottom: 1px solid var(--light-300);
+}
+
+thead {
+	background: var(--light-200);
+}
+
+thead th {
+	text-transform: capitalize;
+	transition: 0.25s;
+	cursor: pointer;
+}
+
+thead th:hover {
+	background: var(--light-300);
+}
+
+@media screen and (min-width: 600px) {
+	th,
+	td {
+		padding: 1.25rem;
+	}
+}
