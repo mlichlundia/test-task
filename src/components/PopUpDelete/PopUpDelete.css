@@ -1,0 +1,33 @@
+.pop-up {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	background: rgba(39, 39, 39, 0.4);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	pointer-events: all;
+	transition: 0.25s;
+}
+
+.pop-up_closed {
+	pointer-events: none;
+	display: none;
+}
+
+.pop-up__container {
+	background: var(--light-100);
+	padding: 1.5rem;
+	border-radius: 0.5rem;
+}
+
+.pop-up p {
+	margin: 0.5rem 0 1.5rem;
+}
+
+.pop-up .button_delete {
+	margin: 0 0.5rem 0 0;
+}

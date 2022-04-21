@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getTableData } from "../../features/tableSlice"
+import { changeIsActive } from "../../features/popUpDeleteSlice"
+import { getTableData, setDeleteId } from "../../features/tableSlice"
 import "./Table.css"
 
 export default function Table() {
@@ -15,11 +16,9 @@ export default function Table() {
 		"delete",
 	]
 	const tableData = useSelector(state => state.table.tableData)
-
 	useEffect(() => {
 		dispatch(getTableData())
 	}, [])
-
 	return (
 		<div className='table__container'>
 			<table>
@@ -54,7 +53,15 @@ export default function Table() {
 								<button className='button_edit'>edit</button>
 							</td>
 							<td>
-								<button className='button_delete'>delete</button>
+								<button
+									className='button_delete'
+									onClick={() => {
+										dispatch(setDeleteId(item.id))
+										dispatch(changeIsActive())
+									}}
+								>
+									delete
+								</button>
 							</td>
 						</tr>
 					))}

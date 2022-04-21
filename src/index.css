@@ -146,6 +146,15 @@ button:hover {
 	background: var(--red-900);
 }
 
+.button_decline {
+	color: var(--dark-800);
+	background: 0;
+}
+
+.button_decline:hover {
+	background: var(--light-300);
+}
+
 @media screen and (min-width: 600px) {
 	html {
 		font-size: 2.66666667vw;
