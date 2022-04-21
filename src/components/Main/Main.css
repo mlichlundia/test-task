@@ -1,3 +1,19 @@
+main {
+	background: var(--light-100);
+	border: 1px solid var(--light-300);
+	border-radius: 0.5rem;
+	padding: 0 0.75rem 0.75rem;
+	margin: 2rem 0 0;
+}
+
+header {
+	margin: 1.5rem 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	text-transform: capitalize;
+}
+
 .main__wrapper {
 	padding: 2.5rem 0.75rem;
 }

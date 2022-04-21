@@ -9,9 +9,9 @@ export default function Form() {
 		},
 	}
 	return (
-		<div className='main__wrapper'>
-			<header>
-				<h1>{form.pageTitle}</h1>
+		<div className='form__container'>
+			<header className='page-header'>
+				<h2>{form.pageTitle}</h2>
 			</header>
 
 			<Link to='/'>

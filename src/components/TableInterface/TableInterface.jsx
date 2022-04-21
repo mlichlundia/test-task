@@ -8,14 +8,14 @@ export default function TableInterface() {
 		button: "add new",
 	}
 	return (
-		<main className='table-interface__container'>
-			<header>
+		<div className='table-interface__container'>
+			<header className='page-header'>
 				<h2>{tableInterface.tableTitle}</h2>
 				<Link to='/form'>
 					<button>{tableInterface.button}</button>
 				</Link>
 			</header>
 			<Table />
-		</main>
+		</div>
 	)
 }

@@ -9,8 +9,10 @@ export default function Main() {
 			<header>
 				<h1>{appName}</h1>
 			</header>
-			<Outlet />
-			<PopUpDelete />
+			<main>
+				<Outlet />
+				<PopUpDelete />
+			</main>
 		</div>
 	)
 }
