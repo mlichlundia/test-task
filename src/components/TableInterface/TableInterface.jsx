@@ -8,7 +8,7 @@ export default function TableInterface() {
 		button: "add new",
 	}
 	return (
-		<div className='table-interface__container'>
+		<div>
 			<header className='page-header'>
 				<h2>{tableInterface.tableTitle}</h2>
 				<Link to='/form'>
