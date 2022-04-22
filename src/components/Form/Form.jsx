@@ -2,7 +2,12 @@ import "./Form.css"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addUser, setIsNew, updateUser } from "../../features/tableSlice"
+import {
+	addUser,
+	setIsNew,
+	sortByUsername,
+	updateUser,
+} from "../../features/tableSlice"
 import {
 	isEmailValid,
 	isNameValid,
@@ -29,7 +34,7 @@ export default function Form() {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-	const id = useSelector(state => state.table.tableDataCopy).length + 1
+	const id = Math.random().toString(36).slice(2, 5)
 	const name = useSelector(state => state.form.name)
 	const username = useSelector(state => state.form.username)
 	const email = useSelector(state => state.form.email)
@@ -67,6 +72,7 @@ export default function Form() {
 
 	function handleSubmit() {
 		isNewUser ? dispatch(addUser(formObject)) : dispatch(updateUser(formObject))
+		dispatch(sortByUsername())
 		dispatch(setName(""))
 		dispatch(setUsername(""))
 		dispatch(setEmail(""))

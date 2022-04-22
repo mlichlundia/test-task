@@ -63,7 +63,7 @@ export default function Table() {
 				</thead>
 				<tbody>
 					{tableData.map((item, index) => (
-						<tr key={item.id}>
+						<tr key={Math.random().toString(36).slice(2, 9)}>
 							<td>
 								<p className='p1'>{item?.id}</p>
 							</td>

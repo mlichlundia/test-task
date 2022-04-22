@@ -63,7 +63,7 @@ export const tableSlice = createSlice({
 		updateIdx: 0,
 		hasUsers: true,
 		isNewUser: true,
-		az: false,
+		az: "",
 	},
 	reducers: {
 		setDeleteId: (state, action) => {
@@ -130,8 +130,12 @@ export const tableSlice = createSlice({
 
 		sortByUsername: state => {
 			state.tableDataCopy = state.az
-				? state.tableDataCopy.sort((a, b) => (a.username > b.username ? 1 : -1))
-				: state.tableDataCopy.sort((a, b) => (a.username > b.username ? -1 : 1))
+				? state.tableDataCopy.sort((a, b) =>
+						a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
+				  )
+				: state.tableDataCopy.sort((a, b) =>
+						a.username.toLowerCase() > b.username.toLowerCase() ? -1 : 1
+				  )
 		},
 
 		sortAz: state => {
