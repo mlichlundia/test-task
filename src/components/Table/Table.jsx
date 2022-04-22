@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { changeIsActive } from "../../features/popUpDeleteSlice"
-import { setDeleteId } from "../../features/tableSlice"
+import { setDeleteId, setIsNew, setUpdateIdx } from "../../features/tableSlice"
 import "./Table.css"
+import { setEmail, setName } from "../../features/FormSlice"
 
 export default function Table() {
 	const dispatch = useDispatch()
@@ -31,7 +32,7 @@ export default function Table() {
 					</tr>
 				</thead>
 				<tbody>
-					{tableData.map(item => (
+					{tableData.map((item, index) => (
 						<tr key={item.email}>
 							<td>
 								<p className='p1'>{item?.id}</p>
@@ -50,7 +51,17 @@ export default function Table() {
 							</td>
 							<td>
 								<Link to='/form'>
-									<button className='button_edit'>edit</button>
+									<button
+										className='button_edit'
+										onClick={() => {
+											dispatch(setUpdateIdx(index))
+											dispatch(setIsNew(false))
+											dispatch(setName(item.name))
+											dispatch(setEmail(item.email))
+										}}
+									>
+										edit
+									</button>
 								</Link>
 							</td>
 							<td>

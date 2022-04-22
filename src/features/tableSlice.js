@@ -22,10 +22,24 @@ export function deleteUserThunk(id) {
 	}
 }
 
-export function AddUserThunk(user) {
+export function addUserThunk(user) {
 	return function (dispatch) {
 		return axios
 			.post(API_BASE_URL, user)
+			.then(res => {
+				const id = res.data.id
+				const name = res.data.name
+				const email = res.data.email
+				dispatch(addUser({ id, name, email }))
+			})
+			.catch(err => console.error(err))
+	}
+}
+
+export function updateUserThunk(user) {
+	return function (dispatch) {
+		return axios
+			.put(API_BASE_URL, user)
 			.then(res => {
 				const id = res.data.id
 				const name = res.data.name
@@ -42,11 +56,22 @@ export const tableSlice = createSlice({
 		tableData: [],
 		tableDataCopy: [],
 		deleteId: 0,
+		updateIdx: 0,
+		isNewUser: true,
 	},
 	reducers: {
 		setDeleteId: (state, action) => {
 			state.deleteId = action.payload
 		},
+
+		setIsNew: (state, action) => {
+			state.isNewUser = action.payload
+		},
+
+		setUpdateIdx: (state, action) => {
+			state.updateIdx = action.payload
+		},
+
 		deleteUser: state => {
 			state.tableDataCopy = state.tableDataCopy.filter(
 				item => item.id !== state.deleteId
@@ -55,6 +80,7 @@ export const tableSlice = createSlice({
 				item => item.id !== state.deleteId
 			)
 		},
+
 		addUser: (state, action) => {
 			state.tableDataCopy = [
 				...state.tableDataCopy,
@@ -73,6 +99,14 @@ export const tableSlice = createSlice({
 				},
 			]
 		},
+
+		updateUser: (state, action) => {
+			state.tableDataCopy[state.updateIdx] = {
+				...state.tableDataCopy[state.updateIdx],
+				name: action.payload.name,
+				email: action.payload.email,
+			}
+		},
 	},
 	extraReducers: builder => {
 		builder
@@ -86,5 +120,12 @@ export const tableSlice = createSlice({
 	},
 })
 
-export const { addUser, deleteUser, setDeleteId } = tableSlice.actions
+export const {
+	addUser,
+	updateUser,
+	deleteUser,
+	setDeleteId,
+	setIsNew,
+	setUpdateIdx,
+} = tableSlice.actions
 export default tableSlice.reducer

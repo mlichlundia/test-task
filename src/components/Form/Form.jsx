@@ -2,7 +2,12 @@ import "./Form.css"
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addUser } from "../../features/tableSlice"
+import {
+	addUser,
+	setIsNew,
+	updateUser,
+	updateUserThunk,
+} from "../../features/tableSlice"
 import { setEmail, setName } from "../../features/FormSlice"
 
 export default function Form() {
@@ -21,6 +26,7 @@ export default function Form() {
 	const id = useSelector(state => state.table.tableDataCopy).length + 1
 	const name = useSelector(state => state.form.name)
 	const email = useSelector(state => state.form.email)
+	const isNewUser = useSelector(state => state.table.isNewUser)
 	const [formObject, setFormObject] = useState({ id: id, name: "", email: "" })
 
 	useEffect(() => {
@@ -34,12 +40,14 @@ export default function Form() {
 	function handleDecline() {
 		dispatch(setName(""))
 		dispatch(setEmail(""))
+		dispatch(setIsNew(true))
 		navigate("/")
 	}
 
 	function handleSubmit() {
 		dispatch(setName(""))
 		dispatch(setEmail(""))
+		dispatch(setIsNew(true))
 		navigate("/")
 	}
 
@@ -83,7 +91,9 @@ export default function Form() {
 						type='submit'
 						onClick={e => {
 							e.preventDefault()
-							dispatch(addUser(formObject))
+							isNewUser
+								? dispatch(addUser(formObject))
+								: dispatch(updateUser(formObject))
 							handleSubmit()
 						}}
 					>
