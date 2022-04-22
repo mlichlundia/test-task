@@ -106,6 +106,12 @@ export const tableSlice = createSlice({
 				name: action.payload.name,
 				email: action.payload.email,
 			}
+
+			state.tableData[state.updateIdx] = {
+				...state.tableData[state.updateIdx],
+				name: action.payload.name,
+				email: action.payload.email,
+			}
 		},
 	},
 	extraReducers: builder => {
