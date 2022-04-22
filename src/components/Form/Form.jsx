@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addUser, setIsNew, updateUser } from "../../features/tableSlice"
 import {
-	changeBeforeSubmit,
 	isEmailValid,
 	isNameValid,
 	setCity,
@@ -68,7 +67,6 @@ export default function Form() {
 
 	function handleSubmit() {
 		isNewUser ? dispatch(addUser(formObject)) : dispatch(updateUser(formObject))
-
 		dispatch(setName(""))
 		dispatch(setUsername(""))
 		dispatch(setEmail(""))

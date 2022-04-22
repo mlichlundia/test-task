@@ -11,6 +11,8 @@ import {
 } from "../../features/tableSlice"
 import "./Table.css"
 import {
+	isEmailValid,
+	isNameValid,
 	setCity,
 	setEmail,
 	setName,
@@ -83,11 +85,13 @@ export default function Table() {
 										className='button_edit'
 										onClick={() => {
 											dispatch(setUpdateIdx(index))
-											dispatch(setIsNew(false))
 											dispatch(setName(item.name))
 											dispatch(setUsername(item.username))
 											dispatch(setEmail(item.email))
 											dispatch(setCity(item.address.city))
+											dispatch(isNameValid(true))
+											dispatch(isEmailValid(true))
+											dispatch(setIsNew(false))
 										}}
 									>
 										edit
