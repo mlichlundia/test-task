@@ -5,7 +5,13 @@ import App from "./App"
 import reportWebVitals from "./reportWebVitals"
 import store from "./app/store"
 import { Provider } from "react-redux"
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
+import {
+	BrowserRouter,
+	Route,
+	Routes,
+	Navigate,
+	HashRouter,
+} from "react-router-dom"
 import TableInterface from "./components/TableInterface/TableInterface"
 import Form from "./components/Form/Form"
 
@@ -13,7 +19,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<BrowserRouter>
+			<HashRouter>
 				<Routes>
 					<Route path='' element={<App />}>
 						<Route path='table' element={<TableInterface />} />
@@ -21,7 +27,7 @@ root.render(
 						<Route path='' element={<Navigate to='table' />} />
 					</Route>
 				</Routes>
-			</BrowserRouter>
+			</HashRouter>
 		</Provider>
 	</React.StrictMode>
 )
