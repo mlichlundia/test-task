@@ -1,7 +1,7 @@
-import { useEffect } from "react"
+import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { changeIsActive } from "../../features/popUpDeleteSlice"
-import { getTableData, setDeleteId } from "../../features/tableSlice"
+import { setDeleteId } from "../../features/tableSlice"
 import "./Table.css"
 
 export default function Table() {
@@ -15,10 +15,9 @@ export default function Table() {
 		"edit",
 		"delete",
 	]
-	const tableData = useSelector(state => state.table.tableData)
-	useEffect(() => {
-		dispatch(getTableData())
-	}, [])
+
+	const tableData = useSelector(state => state.table.tableDataCopy)
+
 	return (
 		<div className='table__container'>
 			<table>
@@ -33,24 +32,26 @@ export default function Table() {
 				</thead>
 				<tbody>
 					{tableData.map(item => (
-						<tr key={item.id}>
+						<tr key={item.email}>
 							<td>
-								<p className='p1'>{item.id}</p>
+								<p className='p1'>{item?.id}</p>
 							</td>
 							<td>
 								<p className='p1'>{item.name}</p>
 							</td>
 							<td>
-								<p className='p1'>{item.username}</p>
+								<p className='p1'>{item?.username}</p>
 							</td>
 							<td>
 								<p className='p1'>{item.email}</p>
 							</td>
 							<td>
-								<p className='p1'>{item.address.city}</p>
+								<p className='p1'>{item?.address?.city}</p>
 							</td>
 							<td>
-								<button className='button_edit'>edit</button>
+								<Link to='/form'>
+									<button className='button_edit'>edit</button>
+								</Link>
 							</td>
 							<td>
 								<button

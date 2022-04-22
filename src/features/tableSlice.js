@@ -25,9 +25,12 @@ export function deleteUserThunk(id) {
 export function AddUserThunk(user) {
 	return function (dispatch) {
 		return axios
-			.post(API_BASE_URL)
+			.post(API_BASE_URL, user)
 			.then(res => {
-				dispatch(addUser(user))
+				const id = res.data.id
+				const name = res.data.name
+				const email = res.data.email
+				dispatch(addUser({ id, name, email }))
 			})
 			.catch(err => console.error(err))
 	}
@@ -37,6 +40,7 @@ export const tableSlice = createSlice({
 	name: "table",
 	initialState: {
 		tableData: [],
+		tableDataCopy: [],
 		deleteId: 0,
 	},
 	reducers: {
@@ -44,18 +48,37 @@ export const tableSlice = createSlice({
 			state.deleteId = action.payload
 		},
 		deleteUser: state => {
+			state.tableDataCopy = state.tableDataCopy.filter(
+				item => item.id !== state.deleteId
+			)
 			state.tableData = state.tableData.filter(
 				item => item.id !== state.deleteId
 			)
 		},
 		addUser: (state, action) => {
-			state.tableData = state.tableData.push(action.payload)
+			state.tableDataCopy = [
+				...state.tableDataCopy,
+				{
+					id: action.payload.id,
+					name: action.payload.name,
+					email: action.payload.email,
+				},
+			]
+			state.tableData = [
+				...state.tableData,
+				{
+					id: action.payload.id,
+					name: action.payload.name,
+					email: action.payload.email,
+				},
+			]
 		},
 	},
 	extraReducers: builder => {
 		builder
 			.addCase(getTableData.fulfilled, (state, action) => {
 				state.tableData = action.payload
+				state.tableDataCopy = [...state.tableData]
 			})
 			.addCase(getTableData.rejected, (state, action) => {
 				console.log(state, action)
