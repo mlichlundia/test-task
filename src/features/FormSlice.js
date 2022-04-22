@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { act } from "react-dom/test-utils"
 
 export const formSlice = createSlice({
 	name: "form",
@@ -8,8 +7,8 @@ export const formSlice = createSlice({
 		username: "",
 		email: "",
 		city: "",
-		isName: true,
-		isEmail: true,
+		isName: "",
+		isEmail: "",
 	},
 	reducers: {
 		setName: (state, action) => {

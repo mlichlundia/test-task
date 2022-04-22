@@ -1,9 +1,10 @@
 import "./Form.css"
 import { useNavigate } from "react-router-dom"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addUser, setIsNew, updateUser } from "../../features/tableSlice"
 import {
+	changeBeforeSubmit,
 	isEmailValid,
 	isNameValid,
 	setCity,
@@ -26,7 +27,6 @@ export default function Form() {
 	const isName = useSelector(state => state.form.isName)
 	const isEmail = useSelector(state => state.form.isEmail)
 
-	const userForm = useRef()
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
@@ -61,22 +61,22 @@ export default function Form() {
 		dispatch(setEmail(""))
 		dispatch(setCity(""))
 		dispatch(setIsNew(true))
-		dispatch(isNameValid(true))
-		dispatch(isEmailValid(true))
+		dispatch(isNameValid(false))
+		dispatch(isEmailValid(false))
 		navigate("/")
 	}
 
 	function handleSubmit() {
-		if (isName && isEmail) {
-			dispatch(setName(""))
-			dispatch(setUsername(""))
-			dispatch(setEmail(""))
-			dispatch(setCity(""))
-			dispatch(setIsNew(true))
-			dispatch(isNameValid(true))
-			dispatch(isEmailValid(true))
-			navigate("/")
-		}
+		isNewUser ? dispatch(addUser(formObject)) : dispatch(updateUser(formObject))
+
+		dispatch(setName(""))
+		dispatch(setUsername(""))
+		dispatch(setEmail(""))
+		dispatch(setCity(""))
+		dispatch(setIsNew(true))
+		dispatch(isNameValid(false))
+		dispatch(isEmailValid(false))
+		navigate("/")
 	}
 
 	return (
@@ -156,10 +156,9 @@ export default function Form() {
 						type='submit'
 						onClick={e => {
 							e.preventDefault()
-							isNewUser
-								? dispatch(addUser(formObject))
-								: dispatch(updateUser(formObject))
-							handleSubmit()
+							if (isName && isEmail) {
+								handleSubmit(e)
+							}
 						}}
 					>
 						submit

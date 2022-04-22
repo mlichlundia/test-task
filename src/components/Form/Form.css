@@ -45,3 +45,7 @@ form p {
 .text-error {
 	color: var(--red-800);
 }
+
+.error-before-submit {
+	display: none;
+}
