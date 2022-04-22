@@ -46,7 +46,7 @@ export default function Table() {
 					<tr>
 						{tableHeader.map(item => (
 							<th
-								key={item}
+								key={Math.random().toString(36).slice(2, 9)}
 								onClick={() => {
 									if (item === "username") {
 										dispatch(sortAz())

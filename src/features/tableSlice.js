@@ -27,12 +27,7 @@ export function addUserThunk(user) {
 		return axios
 			.post(API_BASE_URL, user)
 			.then(res => {
-				const id = res.data.id
-				const name = res.data.name
-				const username = res.data.username
-				const email = res.data.email
-				const city = res.data.city
-				dispatch(addUser({ id, name, username, email, city }))
+				dispatch(addUser({ ...res.data }))
 			})
 			.catch(err => console.error(err))
 	}
@@ -43,12 +38,7 @@ export function updateUserThunk(user) {
 		return axios
 			.put(API_BASE_URL, user)
 			.then(res => {
-				const id = res.data.id
-				const name = res.data.name
-				const username = res.data.username
-				const email = res.data.email
-				const city = res.data.city
-				dispatch(updateUser({ id, name, username, email, city }))
+				dispatch(updateUser({ ...res.data }))
 			})
 			.catch(err => console.error(err))
 	}
@@ -63,7 +53,7 @@ export const tableSlice = createSlice({
 		updateIdx: 0,
 		hasUsers: true,
 		isNewUser: true,
-		az: "",
+		az: "initial",
 	},
 	reducers: {
 		setDeleteId: (state, action) => {
@@ -129,6 +119,9 @@ export const tableSlice = createSlice({
 		},
 
 		sortByUsername: state => {
+			if (state.az === "initial") {
+				return
+			}
 			state.tableDataCopy = state.az
 				? state.tableDataCopy.sort((a, b) =>
 						a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1
@@ -139,7 +132,11 @@ export const tableSlice = createSlice({
 		},
 
 		sortAz: state => {
-			state.az = state.az ? false : true
+			if (state.az === "initial") {
+				state.az = true
+			} else {
+				state.az = state.az ? false : true
+			}
 		},
 
 		tableHasUsers: state => {

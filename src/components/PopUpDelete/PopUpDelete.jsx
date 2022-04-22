@@ -6,7 +6,7 @@ import "./PopUpDelete.css"
 export default function PopUpDelete() {
 	const dispatch = useDispatch()
 	const active = useSelector(state => state.popUpDel.isActive)
-	console.log(active)
+
 	return (
 		<div
 			className={active ? "pop-up" : "pop-up_closed"}
