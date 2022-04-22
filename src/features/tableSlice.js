@@ -58,6 +58,7 @@ export const tableSlice = createSlice({
 		deleteId: 0,
 		updateIdx: 0,
 		isNewUser: true,
+		az: false,
 	},
 	reducers: {
 		setDeleteId: (state, action) => {
@@ -113,6 +114,16 @@ export const tableSlice = createSlice({
 				email: action.payload.email,
 			}
 		},
+
+		sortByUsername: state => {
+			state.tableDataCopy = state.az
+				? state.tableDataCopy.sort((a, b) => (a.username > b.username ? 1 : -1))
+				: state.tableDataCopy.sort((a, b) => (a.username > b.username ? -1 : 1))
+		},
+
+		sortAz: state => {
+			state.az = state.az ? false : true
+		},
 	},
 	extraReducers: builder => {
 		builder
@@ -133,5 +144,7 @@ export const {
 	setDeleteId,
 	setIsNew,
 	setUpdateIdx,
+	sortByUsername,
+	sortAz,
 } = tableSlice.actions
 export default tableSlice.reducer

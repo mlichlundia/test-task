@@ -8,7 +8,7 @@ import {
 	isNameValid,
 	setEmail,
 	setName,
-} from "../../features/FormSlice"
+} from "../../features/formSlice"
 
 export default function Form() {
 	const form = {

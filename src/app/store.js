@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit"
 import thunk from "redux-thunk"
-import formReducer from "../features/FormSlice"
+import formReducer from "../features/formSlice"
 import popUpDeleteReducer from "../features/popUpDeleteSlice"
 import tableReducer from "../features/tableSlice"
 

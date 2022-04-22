@@ -33,6 +33,18 @@ thead th:hover {
 	background: var(--light-300);
 }
 
+thead th h3 {
+	position: relative;
+}
+
+.table__username::before {
+	content: "❯";
+	position: absolute;
+	bottom: -1.25rem;
+	left: 50%;
+	transform: rotate(90deg);
+}
+
 @media screen and (min-width: 600px) {
 	th,
 	td {

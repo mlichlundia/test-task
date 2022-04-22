@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { changeIsActive } from "../../features/popUpDeleteSlice"
-import { setDeleteId, setIsNew, setUpdateIdx } from "../../features/tableSlice"
+import {
+	setDeleteId,
+	setIsNew,
+	setUpdateIdx,
+	sortAz,
+	sortByUsername,
+} from "../../features/tableSlice"
 import "./Table.css"
-import { setEmail, setName } from "../../features/FormSlice"
+import { setEmail, setName } from "../../features/formSlice"
 
 export default function Table() {
 	const dispatch = useDispatch()
@@ -25,8 +31,18 @@ export default function Table() {
 				<thead>
 					<tr>
 						{tableHeader.map(item => (
-							<th key={item}>
-								<h3>{item}</h3>
+							<th
+								key={item}
+								onClick={() => {
+									if (item === "username") {
+										dispatch(sortAz())
+										dispatch(sortByUsername())
+									}
+								}}
+							>
+								<h3 className={item === "username" ? "table__username" : ""}>
+									{item}
+								</h3>
 							</th>
 						))}
 					</tr>
