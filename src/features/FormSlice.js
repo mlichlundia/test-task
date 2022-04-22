@@ -5,7 +5,9 @@ export const formSlice = createSlice({
 	name: "form",
 	initialState: {
 		name: "",
+		username: "",
 		email: "",
+		city: "",
 		isName: true,
 		isEmail: true,
 	},
@@ -13,9 +15,19 @@ export const formSlice = createSlice({
 		setName: (state, action) => {
 			state.name = action.payload
 		},
+
+		setUsername: (state, action) => {
+			state.username = action.payload
+		},
+
 		setEmail: (state, action) => {
 			state.email = action.payload
 		},
+
+		setCity: (state, action) => {
+			state.city = action.payload
+		},
+
 		isNameValid: (state, action) => {
 			if (action.payload) {
 				state.isName = action.payload
@@ -27,6 +39,7 @@ export const formSlice = createSlice({
 				state.isName = true
 			}
 		},
+
 		isEmailValid: (state, action) => {
 			if (action.payload) {
 				state.isEmail = action.payload
@@ -41,6 +54,12 @@ export const formSlice = createSlice({
 	},
 })
 
-export const { setName, setEmail, isNameValid, isEmailValid } =
-	formSlice.actions
+export const {
+	setName,
+	setUsername,
+	setEmail,
+	setCity,
+	isNameValid,
+	isEmailValid,
+} = formSlice.actions
 export default formSlice.reducer

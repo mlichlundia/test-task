@@ -6,8 +6,10 @@ import { addUser, setIsNew, updateUser } from "../../features/tableSlice"
 import {
 	isEmailValid,
 	isNameValid,
+	setCity,
 	setEmail,
 	setName,
+	setUsername,
 } from "../../features/formSlice"
 
 export default function Form() {
@@ -15,7 +17,9 @@ export default function Form() {
 		pageTitle: "form",
 		inputFields: {
 			name: "Name",
+			username: "Username",
 			email: "Email",
+			city: "City",
 		},
 	}
 
@@ -28,21 +32,34 @@ export default function Form() {
 
 	const id = useSelector(state => state.table.tableDataCopy).length + 1
 	const name = useSelector(state => state.form.name)
+	const username = useSelector(state => state.form.username)
 	const email = useSelector(state => state.form.email)
+	const city = useSelector(state => state.form.city)
+
 	const isNewUser = useSelector(state => state.table.isNewUser)
-	const [formObject, setFormObject] = useState({ id: id, name: "", email: "" })
+	const [formObject, setFormObject] = useState({
+		id: id,
+		name: "",
+		username: "",
+		email: "",
+		city: "",
+	})
 
 	useEffect(() => {
 		let obj = { ...formObject }
 		obj.id = id
 		obj.name = name
+		obj.username = username
 		obj.email = email
+		obj.city = city
 		setFormObject(obj)
-	}, [name, email])
+	}, [name, username, email, city])
 
 	function handleDecline() {
 		dispatch(setName(""))
+		dispatch(setUsername(""))
 		dispatch(setEmail(""))
+		dispatch(setCity(""))
 		dispatch(setIsNew(true))
 		dispatch(isNameValid(true))
 		dispatch(isEmailValid(true))
@@ -52,7 +69,9 @@ export default function Form() {
 	function handleSubmit() {
 		if (isName && isEmail) {
 			dispatch(setName(""))
+			dispatch(setUsername(""))
 			dispatch(setEmail(""))
+			dispatch(setCity(""))
 			dispatch(setIsNew(true))
 			dispatch(isNameValid(true))
 			dispatch(isEmailValid(true))
@@ -65,7 +84,7 @@ export default function Form() {
 			<header className='page-header'>
 				<h2>{form.pageTitle}</h2>
 			</header>
-			<form ref={userForm}>
+			<form>
 				<section>
 					<div>
 						<label htmlFor='name'>{form.inputFields.name}</label>
@@ -83,6 +102,19 @@ export default function Form() {
 					<p className={isName ? "text-no-error" : "text-error"}>
 						Name is invalid. The name should contain from 2 to 50 symbols
 					</p>
+
+					<div>
+						<label htmlFor='username'>{form.inputFields.username}</label>
+						<input
+							onChange={e => {
+								dispatch(setUsername(e.target.value))
+							}}
+							value={username}
+							name='username'
+							type='text'
+						/>
+					</div>
+
 					<div>
 						<label htmlFor='email'>{form.inputFields.email}</label>
 						<input
@@ -99,6 +131,18 @@ export default function Form() {
 					<p className={isEmail ? "text-no-error" : "text-error"}>
 						Email is invalid. The email should contain @ symbol
 					</p>
+
+					<div>
+						<label htmlFor='city'>{form.inputFields.city}</label>
+						<input
+							onChange={e => {
+								dispatch(setCity(e.target.value))
+							}}
+							value={city}
+							name='city'
+							type='text'
+						/>
+					</div>
 				</section>
 				<div className='form__button-container'>
 					<button

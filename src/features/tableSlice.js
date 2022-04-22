@@ -29,8 +29,10 @@ export function addUserThunk(user) {
 			.then(res => {
 				const id = res.data.id
 				const name = res.data.name
+				const username = res.data.username
 				const email = res.data.email
-				dispatch(addUser({ id, name, email }))
+				const city = res.data.city
+				dispatch(addUser({ id, name, username, email, city }))
 			})
 			.catch(err => console.error(err))
 	}
@@ -43,8 +45,10 @@ export function updateUserThunk(user) {
 			.then(res => {
 				const id = res.data.id
 				const name = res.data.name
+				const username = res.data.username
 				const email = res.data.email
-				dispatch(addUser({ id, name, email }))
+				const city = res.data.city
+				dispatch(updateUser({ id, name, username, email, city }))
 			})
 			.catch(err => console.error(err))
 	}
@@ -89,7 +93,9 @@ export const tableSlice = createSlice({
 				{
 					id: action.payload.id,
 					name: action.payload.name,
+					username: action.payload.username,
 					email: action.payload.email,
+					address: { city: action.payload.city },
 				},
 			]
 			state.tableData = [
@@ -97,7 +103,9 @@ export const tableSlice = createSlice({
 				{
 					id: action.payload.id,
 					name: action.payload.name,
+					username: action.payload.username,
 					email: action.payload.email,
+					address: { city: action.payload.city },
 				},
 			]
 		},
@@ -106,13 +114,17 @@ export const tableSlice = createSlice({
 			state.tableDataCopy[state.updateIdx] = {
 				...state.tableDataCopy[state.updateIdx],
 				name: action.payload.name,
+				username: action.payload.username,
 				email: action.payload.email,
+				address: { city: action.payload.city },
 			}
 
 			state.tableData[state.updateIdx] = {
 				...state.tableData[state.updateIdx],
 				name: action.payload.name,
+				username: action.payload.username,
 				email: action.payload.email,
+				address: { city: action.payload.city },
 			}
 		},
 

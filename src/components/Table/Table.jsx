@@ -10,7 +10,12 @@ import {
 	tableHasUsers,
 } from "../../features/tableSlice"
 import "./Table.css"
-import { setEmail, setName } from "../../features/formSlice"
+import {
+	setCity,
+	setEmail,
+	setName,
+	setUsername,
+} from "../../features/formSlice"
 import { useEffect } from "react"
 
 export default function Table() {
@@ -80,7 +85,9 @@ export default function Table() {
 											dispatch(setUpdateIdx(index))
 											dispatch(setIsNew(false))
 											dispatch(setName(item.name))
+											dispatch(setUsername(item.username))
 											dispatch(setEmail(item.email))
+											dispatch(setCity(item.address.city))
 										}}
 									>
 										edit
