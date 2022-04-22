@@ -7,9 +7,11 @@ import {
 	setUpdateIdx,
 	sortAz,
 	sortByUsername,
+	tableHasUsers,
 } from "../../features/tableSlice"
 import "./Table.css"
 import { setEmail, setName } from "../../features/formSlice"
+import { useEffect } from "react"
 
 export default function Table() {
 	const dispatch = useDispatch()
@@ -24,6 +26,11 @@ export default function Table() {
 	]
 
 	const tableData = useSelector(state => state.table.tableDataCopy)
+	const hasUsers = useSelector(state => state.table.hasUsers)
+
+	useEffect(() => {
+		dispatch(tableHasUsers())
+	}, [tableData])
 
 	return (
 		<div className='table__container'>
@@ -95,6 +102,9 @@ export default function Table() {
 					))}
 				</tbody>
 			</table>
+			<p className={hasUsers ? "table_has-users" : "table_no-users"}>
+				Table is empty. Add new users
+			</p>
 		</div>
 	)
 }

@@ -57,6 +57,7 @@ export const tableSlice = createSlice({
 		tableDataCopy: [],
 		deleteId: 0,
 		updateIdx: 0,
+		hasUsers: true,
 		isNewUser: true,
 		az: false,
 	},
@@ -124,6 +125,10 @@ export const tableSlice = createSlice({
 		sortAz: state => {
 			state.az = state.az ? false : true
 		},
+
+		tableHasUsers: state => {
+			state.hasUsers = state.tableData.length ? true : false
+		},
 	},
 	extraReducers: builder => {
 		builder
@@ -146,5 +151,6 @@ export const {
 	setUpdateIdx,
 	sortByUsername,
 	sortAz,
+	tableHasUsers,
 } = tableSlice.actions
 export default tableSlice.reducer

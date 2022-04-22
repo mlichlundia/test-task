@@ -45,6 +45,18 @@ thead th h3 {
 	transform: rotate(90deg);
 }
 
+.table_no-users {
+	display: block;
+	text-align: center;
+	padding: 1.5rem 0;
+	color: var(--dark-800);
+	font-size: 1.25rem;
+}
+
+.table_has-users {
+	display: none;
+}
+
 @media screen and (min-width: 600px) {
 	th,
 	td {
