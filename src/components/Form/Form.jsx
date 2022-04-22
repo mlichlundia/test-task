@@ -1,14 +1,14 @@
 import "./Form.css"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { addUser, setIsNew, updateUser } from "../../features/tableSlice"
 import {
-	addUser,
-	setIsNew,
-	updateUser,
-	updateUserThunk,
-} from "../../features/tableSlice"
-import { setEmail, setName } from "../../features/FormSlice"
+	isEmailValid,
+	isNameValid,
+	setEmail,
+	setName,
+} from "../../features/FormSlice"
 
 export default function Form() {
 	const form = {
@@ -18,6 +18,9 @@ export default function Form() {
 			email: "Email",
 		},
 	}
+
+	const isName = useSelector(state => state.form.isName)
+	const isEmail = useSelector(state => state.form.isEmail)
 
 	const userForm = useRef()
 	const dispatch = useDispatch()
@@ -41,14 +44,20 @@ export default function Form() {
 		dispatch(setName(""))
 		dispatch(setEmail(""))
 		dispatch(setIsNew(true))
+		dispatch(isNameValid(true))
+		dispatch(isEmailValid(true))
 		navigate("/")
 	}
 
 	function handleSubmit() {
-		dispatch(setName(""))
-		dispatch(setEmail(""))
-		dispatch(setIsNew(true))
-		navigate("/")
+		if (isName && isEmail) {
+			dispatch(setName(""))
+			dispatch(setEmail(""))
+			dispatch(setIsNew(true))
+			dispatch(isNameValid(true))
+			dispatch(isEmailValid(true))
+			navigate("/")
+		}
 	}
 
 	return (
@@ -61,23 +70,35 @@ export default function Form() {
 					<div>
 						<label htmlFor='name'>{form.inputFields.name}</label>
 						<input
-							onChange={e => dispatch(setName(e.target.value))}
+							onChange={e => {
+								dispatch(setName(e.target.value))
+								dispatch(isNameValid())
+							}}
 							value={name}
 							name='name'
 							type='name'
 							required
 						/>
 					</div>
+					<p className={isName ? "text-no-error" : "text-error"}>
+						Name is invalid. The name should contain from 2 to 50 symbols
+					</p>
 					<div>
 						<label htmlFor='email'>{form.inputFields.email}</label>
 						<input
-							onChange={e => dispatch(setEmail(e.target.value))}
+							onChange={e => {
+								dispatch(setEmail(e.target.value))
+								dispatch(isEmailValid())
+							}}
 							value={email}
 							name='email'
 							type='email'
 							required
 						/>
 					</div>
+					<p className={isEmail ? "text-no-error" : "text-error"}>
+						Email is invalid. The email should contain @ symbol
+					</p>
 				</section>
 				<div className='form__button-container'>
 					<button

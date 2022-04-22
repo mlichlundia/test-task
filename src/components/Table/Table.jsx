@@ -33,7 +33,7 @@ export default function Table() {
 				</thead>
 				<tbody>
 					{tableData.map((item, index) => (
-						<tr key={item.email}>
+						<tr key={item.id}>
 							<td>
 								<p className='p1'>{item?.id}</p>
 							</td>
