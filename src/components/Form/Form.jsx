@@ -1,6 +1,8 @@
 import "./Form.css"
 import { Link } from "react-router-dom"
-import { useRef } from "react"
+import { useRef, useState } from "react"
+import { useDispatch } from "react-redux"
+import { addUser } from "../../features/tableSlice"
 
 export default function Form() {
 	const form = {
@@ -12,6 +14,8 @@ export default function Form() {
 	}
 
 	const userForm = useRef()
+	const dispatch = useDispatch()
+	const [nameValue, setNameValue] = useState("")
 
 	return (
 		<div>
@@ -33,7 +37,9 @@ export default function Form() {
 					<Link to='/'>
 						<button className='button_decline'>Decline</button>
 					</Link>
-					<button type='submit'>submit</button>
+					<button type='submit' onSubmit={() => dispatch(addUser())}>
+						submit
+					</button>
 				</div>
 			</form>
 		</div>

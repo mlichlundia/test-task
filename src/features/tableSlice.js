@@ -22,6 +22,17 @@ export function deleteUserThunk(id) {
 	}
 }
 
+export function AddUserThunk(user) {
+	return function (dispatch) {
+		return axios
+			.post(API_BASE_URL)
+			.then(res => {
+				dispatch(addUser(user))
+			})
+			.catch(err => console.error(err))
+	}
+}
+
 export const tableSlice = createSlice({
 	name: "table",
 	initialState: {
@@ -37,6 +48,9 @@ export const tableSlice = createSlice({
 				item => item.id !== state.deleteId
 			)
 		},
+		addUser: (state, action) => {
+			state.tableData = state.tableData.push(action.payload)
+		},
 	},
 	extraReducers: builder => {
 		builder
@@ -49,5 +63,5 @@ export const tableSlice = createSlice({
 	},
 })
 
-export const { deleteUser, setDeleteId } = tableSlice.actions
+export const { addUser, deleteUser, setDeleteId } = tableSlice.actions
 export default tableSlice.reducer
